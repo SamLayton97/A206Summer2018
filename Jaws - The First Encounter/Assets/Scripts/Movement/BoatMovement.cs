@@ -8,8 +8,8 @@ public class BoatMovement : MonoBehaviour
     // var storage
     Rigidbody2D rb2d;
     Vector2 boatDirection = new Vector2(1, 0);
-    const float boatForce = 4;
-    const float rotateDegreesPerSecond = 90;
+    float boatForce;
+    float rotateDegreesPerSecond;
     bool canTurn = true;
 
     // timer to determine time left for the boat to turn post ending of acceleration
@@ -18,6 +18,10 @@ public class BoatMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // sets movement fields to configured data
+        boatForce = PlayerConfigUtils.ForwardForce;
+        rotateDegreesPerSecond = PlayerConfigUtils.RotationRate;
+
         //Get and store a reference to the Rigidbody2D component to access it
         rb2d = gameObject.GetComponent<Rigidbody2D>();
 
