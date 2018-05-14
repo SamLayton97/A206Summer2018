@@ -1,0 +1,59 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BoatMovement : MonoBehaviour
+{
+
+    // var storage
+    Rigidbody2D rb2d;
+    Vector2 boatDirection = new Vector2(1, 0);
+    const float boatForce = 4;
+    const float rotateDegreesPerSecond = 90;
+    bool canTurn = true;
+
+    // timer to determine time left for the boat to turn post ending of acceleration
+    Timer turnTimer;
+
+    // Use this for initialization
+    void Start()
+    {
+        //Get and store a reference to the Rigidbody2D component to access it
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
+
+    }
+
+    // FixedUpdate is called at a constant rate reguardless of local framerate
+    void FixedUpdate()
+    {
+        // Accelerate as appropriate
+        if (Input.GetAxisRaw("Accelerate") > 0)
+        {
+            rb2d.AddForce(boatDirection * boatForce, ForceMode2D.Force);
+
+            // Only Allow Boat to turn while accelerating
+            turnBoat();
+        }
+    }
+
+    void turnBoat()
+    {
+        // check for rotation input
+        float rotationInput = Input.GetAxisRaw("Rotate");
+        if (rotationInput != 0)
+        {
+            // calculate rotation amount and apply rotation
+            float rotationAmount = rotateDegreesPerSecond * Time.deltaTime;
+            if (rotationInput < 0)
+            {
+                rotationAmount *= -1;
+            }
+            transform.Rotate(Vector3.forward, rotationAmount);
+
+            // change thrust direction to match boat rotation
+            float zRotation = transform.eulerAngles.z * Mathf.Deg2Rad;
+            boatDirection.x = Mathf.Cos(zRotation);
+            boatDirection.y = Mathf.Sin(zRotation);
+        }
+    }
+}
