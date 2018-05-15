@@ -10,10 +10,6 @@ public class BoatMovement : MonoBehaviour
     Vector2 boatDirection = new Vector2(1, 0);
     float boatForce;
     float rotateDegreesPerSecond;
-    bool canTurn = true;
-
-    // timer to determine time left for the boat to turn post ending of acceleration
-    Timer turnTimer;
 
     // Use this for initialization
     void Start()
@@ -24,7 +20,6 @@ public class BoatMovement : MonoBehaviour
 
         //Get and store a reference to the Rigidbody2D component to access it
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-
     }
 
     // FixedUpdate is called at a constant rate reguardless of local framerate
@@ -36,11 +31,11 @@ public class BoatMovement : MonoBehaviour
             rb2d.AddForce(boatDirection * boatForce, ForceMode2D.Force);
 
             // Only Allow Boat to turn while accelerating
-            turnBoat();
+            TurnBoat();
         }
     }
 
-    void turnBoat()
+    void TurnBoat()
     {
         // check for rotation input
         float rotationInput = Input.GetAxisRaw("Rotate");
