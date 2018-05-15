@@ -16,9 +16,16 @@ public class PlayerConfigData
     // declares name of file to read from
     const string PlayerConfigDataFileName = "PlayerConfigData.csv";
 
-    // declares variables and sets them to safe "defaults"
+    // declares movement variables and sets them to safe defaults
     float forwardForce = 4f;
     float rotationRate = 90f;
+
+    // declares force factor fields and sets them to safe defaults
+    float fullAhead = 1f;
+    float slowAhead = .5f;
+    float stop = 0;
+    float slowAstern = .2f;
+    float fullAstern = .4f;
 
     #endregion
 
@@ -38,6 +45,46 @@ public class PlayerConfigData
     public float RotationRate
     {
         get { return rotationRate; }
+    }
+
+    /// <summary>
+    /// Gets boat's full ahead force factor
+    /// </summary>
+    public float FullAhead
+    {
+        get { return fullAhead; }
+    }
+
+    /// <summary>
+    /// Gets boat's slow ahead force factor
+    /// </summary>
+    public float SlowAhead
+    {
+        get { return slowAhead; }
+    }
+
+    /// <summary>
+    /// Gets boat's stop force factor
+    /// </summary>
+    public float Stop
+    {
+        get { return stop; }
+    }
+
+    /// <summary>
+    /// Gets boat's slow astern force factor
+    /// </summary>
+    public float SlowAstern
+    {
+        get { return slowAstern; }
+    }
+
+    /// <summary>
+    /// Gets boat's full astern force factor
+    /// </summary>
+    public float FullAstern
+    {
+        get { return fullAstern; }
     }
 
     #endregion
@@ -103,6 +150,13 @@ public class PlayerConfigData
         // sets movement fields to appropriate values
         forwardForce = float.Parse(csvData["forwardForce"]);
         rotationRate = float.Parse(csvData["rotationRate"]);
+
+        // sets force factor fields to appropriate values
+        fullAhead = float.Parse(csvData["fullAhead"]);
+        slowAhead = float.Parse(csvData["slowAhead"]);
+        stop = float.Parse(csvData["stop"]);
+        slowAstern = float.Parse(csvData["slowAstern"]);
+        fullAstern = float.Parse(csvData["fullAstern"]);
     }
 
 }

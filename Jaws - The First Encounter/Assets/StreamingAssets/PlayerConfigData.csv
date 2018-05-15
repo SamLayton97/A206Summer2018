@@ -1,2 +1,2 @@
-forwardForce,rotationRate
-4,90
+forwardForce,rotationRate,fullAhead,slowAhead,stop,slowAstern,fullAstern
+4,90,1,0.5,0,-0.2,-0.4

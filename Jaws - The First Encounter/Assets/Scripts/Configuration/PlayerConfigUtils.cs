@@ -27,6 +27,46 @@ public static class PlayerConfigUtils
         get { return playerConfigData.RotationRate; }
     }
 
+    /// <summary>
+    /// Returns boat's full ahead force factor
+    /// </summary>
+    public static float FullAhead
+    {
+        get { return playerConfigData.FullAhead; }
+    }
+
+    /// <summary>
+    /// Returns boat's slow ahead force factor
+    /// </summary>
+    public static float SlowAhead
+    {
+        get { return playerConfigData.SlowAhead; }
+    }
+
+    /// <summary>
+    /// Returns boat's stop force factor
+    /// </summary>
+    public static float Stop
+    {
+        get { return playerConfigData.Stop; }
+    }
+
+    /// <summary>
+    /// Returns boat's slow astern force factor
+    /// </summary>
+    public static float SlowAstern
+    {
+        get { return playerConfigData.SlowAstern; }
+    }
+
+    /// <summary>
+    /// Returns boat's full astern force factor
+    /// </summary>
+    public static float FullAstern
+    {
+        get { return playerConfigData.FullAstern; }
+    }
+
     #endregion
 
     /// <summary>
