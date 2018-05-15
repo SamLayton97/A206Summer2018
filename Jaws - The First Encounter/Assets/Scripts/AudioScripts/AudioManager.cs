@@ -5,19 +5,38 @@ using UnityEngine;
 /// <summary>
 /// Manages audio across entire game
 /// </summary>
-public static class AudioManager
+public class AudioManager : MonoBehaviour
 {
+    #region Singleton
+
+    public static AudioManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    #endregion
+
     #region Fields
-    static bool initialized = false;
-    static AudioSource audioSource;
-    static Dictionary<AudioClipName, AudioClip> audioClips = new Dictionary<AudioClipName, AudioClip>();
+    bool initialized = false;
+    AudioSource audioSource;
+    Dictionary<AudioClipName, AudioClip> audioClips = new Dictionary<AudioClipName, AudioClip>();
     #endregion
 
     #region Properties
     /// <summary>
     /// Gets whether audio manager has been initialized
     /// </summary>
-    public static bool Initialized
+    public  bool Initialized
     {
         get { return initialized; }
     }
@@ -29,7 +48,7 @@ public static class AudioManager
     /// Initializes audio manager
     /// </summary>
     /// <param name="source"></param>
-    public static void Initialize(AudioSource source)
+    public void Initialize(AudioSource source)
     {
         initialized = true;
         audioSource = source;
@@ -42,7 +61,7 @@ public static class AudioManager
     /// Plays audio clip with given name
     /// </summary>
     /// <param name="name">name of sound to play</param>
-    public static void Play(AudioClipName name)
+    public void Play(AudioClipName name)
     {
         if (audioSource != null)
         {

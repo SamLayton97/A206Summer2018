@@ -13,11 +13,11 @@ public class GameAudioSource : MonoBehaviour {
     private void Awake()
     {
         // keeps only one audio source in the game
-        if (!AudioManager.Initialized)
+        if (!AudioManager.Instance.Initialized)
         {
             // initialize audio source and persist audio source across scenes
             AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-            AudioManager.Initialize(audioSource);
+            AudioManager.Instance.Initialize(audioSource);
             DontDestroyOnLoad(gameObject);
         }
         else
