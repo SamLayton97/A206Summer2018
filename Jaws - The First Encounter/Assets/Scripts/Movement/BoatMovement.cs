@@ -33,6 +33,14 @@ public class BoatMovement : MonoBehaviour
             // Only Allow Boat to turn while accelerating
             TurnBoat();
         }
+
+        if (Input.GetAxisRaw("Reverse") > 0)
+        {
+            rb2d.AddForce(boatDirection * (boatForce *(-1)), ForceMode2D.Force);
+
+            // Only Allow Boat to turn while reversing
+            TurnBoat();
+        }
     }
 
     void TurnBoat()
