@@ -16,9 +16,9 @@ public class BoatMovement : MonoBehaviour
     // Declares dictionary to pair boat speeds with appropriate force factors
     Dictionary<BoatSpeeds, float> forceFactorRange = new Dictionary<BoatSpeeds, float>();
 
-    // Placeholder text to display boat's current speed
-    // Note: Will be replaced with more formal UI at later date
-    Text speedText;                             // text to display boat's speed setting
+    // speed indicator support
+    // Note: Must be refactored later to use event handling when that is added
+    SpeedControlIndicator scIndicator;          // indicator control
     BoatSpeeds boatSpeed = BoatSpeeds.stop;     // boat's speed setting
 
     // Use this for initialization
@@ -39,9 +39,8 @@ public class BoatMovement : MonoBehaviour
         //Get and store a reference to the Rigidbody2D component to access it
         rb2d = gameObject.GetComponent<Rigidbody2D>();
 
-        // Gets speed text component and initializes it to 0
-        speedText = GameObject.FindGameObjectWithTag("boatSpeedText").GetComponent<Text>();
-        speedText.text = "Speed: " + boatSpeed;
+        // Gets speed indicator component
+        scIndicator = GameObject.FindGameObjectWithTag("speedControl").GetComponent<SpeedControlIndicator>();
     }
 
     /// <summary>
@@ -57,8 +56,8 @@ public class BoatMovement : MonoBehaviour
                 --boatSpeed;
             forceFactor = forceFactorRange[boatSpeed];
 
-            // update text indicator
-            speedText.text = "Speed: " + boatSpeed;
+            // update speed indicator
+            scIndicator.ChangeSpeed(boatSpeed);
         }
 
         // if player triggers reverse input
@@ -69,8 +68,8 @@ public class BoatMovement : MonoBehaviour
                 ++boatSpeed;
             forceFactor = forceFactorRange[boatSpeed];
 
-            // update text indicator
-            speedText.text = "Speed: " + boatSpeed;
+            // update speed indicator
+            scIndicator.ChangeSpeed(boatSpeed);
         }
     }
 

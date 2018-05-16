@@ -12,7 +12,8 @@ public class GameInitializer : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        // initializes config utils scripts
+        // initializes utility scripts
+        ScreenUtils.Initialize();
         PlayerConfigUtils.Initialize();
     }
 }
