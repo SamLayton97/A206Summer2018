@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class BoatMovement : MonoBehaviour
 {
-
     // var storage
     Rigidbody2D rb2d;                           // boat's rigid body 2d component
     Vector2 boatDirection = new Vector2(1, 0);  // initial direction of boat
@@ -16,10 +16,24 @@ public class BoatMovement : MonoBehaviour
     // Declares dictionary to pair boat speeds with appropriate force factors
     Dictionary<BoatSpeeds, float> forceFactorRange = new Dictionary<BoatSpeeds, float>();
 
-    // speed indicator support
-    // Note: Must be refactored later to use event handling when that is added
-    SpeedControlIndicator scIndicator;          // indicator control
-    BoatSpeeds boatSpeed = BoatSpeeds.stop;     // boat's speed setting
+    // speed indicator event support
+    ChangeSpeedEvent changeSpeedEvent;          // event fired when player changes speed
+    BoatSpeeds boatSpeed = BoatSpeeds.stop;     // boat's current speed setting
+
+    #region Public Methods
+
+    /// <summary>
+    /// Adds given listener to Change Speeds Event
+    /// </summary>
+    /// <param name="listener">listener</param>
+    public void AddChangeSpeedListener(UnityAction<BoatSpeeds> listener)
+    {
+        changeSpeedEvent.AddListener(listener);
+    }
+
+    #endregion
+
+    #region Private Methods
 
     // Use this for initialization
     void Start()
@@ -39,8 +53,9 @@ public class BoatMovement : MonoBehaviour
         //Get and store a reference to the Rigidbody2D component to access it
         rb2d = gameObject.GetComponent<Rigidbody2D>();
 
-        // Gets speed indicator component
-        scIndicator = GameObject.FindGameObjectWithTag("speedControl").GetComponent<SpeedControlIndicator>();
+        // add self as invoker of Change Speed Event
+        changeSpeedEvent = new ChangeSpeedEvent();
+        EventManager.AddChangeSpeedInvoker(this);
     }
 
     /// <summary>
@@ -57,7 +72,7 @@ public class BoatMovement : MonoBehaviour
             forceFactor = forceFactorRange[boatSpeed];
 
             // update speed indicator
-            scIndicator.ChangeSpeed(boatSpeed);
+            changeSpeedEvent.Invoke(boatSpeed);
         }
 
         // if player triggers reverse input
@@ -69,7 +84,7 @@ public class BoatMovement : MonoBehaviour
             forceFactor = forceFactorRange[boatSpeed];
 
             // update speed indicator
-            scIndicator.ChangeSpeed(boatSpeed);
+            changeSpeedEvent.Invoke(boatSpeed);
         }
     }
 
@@ -106,4 +121,7 @@ public class BoatMovement : MonoBehaviour
             boatDirection.y = Mathf.Sin(zRotation);
         }
     }
+
+    #endregion
+
 }

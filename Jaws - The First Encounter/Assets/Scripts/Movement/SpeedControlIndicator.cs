@@ -31,6 +31,9 @@ public class SpeedControlIndicator : MonoBehaviour
 
         // sets image to safe default
         image.sprite = stopSprite;
+
+        // adds own ChangeSpeed method as listener to Change Speed Event
+        EventManager.AddChangeSpeedListener(ChangeSpeed);
 	}
 
     /// <summary>
