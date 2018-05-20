@@ -67,6 +67,38 @@ public static class PlayerConfigUtils
         get { return playerConfigData.FullAstern; }
     }
 
+    /// <summary>
+    /// Returns boat's max hull integrity
+    /// </summary>
+    public static int HullIntegrity
+    {
+        get { return playerConfigData.HullIntegrity; }
+    }
+
+    /// <summary>
+    /// Return max space boat's hull can store
+    /// </summary>
+    public static int HullCapacity
+    {
+        get { return playerConfigData.HullCapacity; }
+    }
+
+    /// <summary>
+    /// Returns max amount of gas boat can store
+    /// </summary>
+    public static float GasTankSize
+    {
+        get { return playerConfigData.GasTankSize; }
+    }
+
+    /// <summary>
+    /// Returns rate at which boat consumes gas
+    /// </summary>
+    public static float GasConsumptionRate
+    {
+        get { return playerConfigData.GasConsumptionRate; }
+    }
+
     #endregion
 
     /// <summary>

@@ -1,2 +1,2 @@
-forwardForce,rotationRate,fullAhead,slowAhead,stop,slowAstern,fullAstern
-4,90,1,0.5,0,-0.2,-0.4
+forwardForce,rotationRate,fullAhead,slowAhead,stop,slowAstern,fullAstern,hullIntegrity,hullCapacity,gasTankSize,gasConsumptionRate
+4,90,1,0.5,0,-0.2,-0.4,100,20,50,1

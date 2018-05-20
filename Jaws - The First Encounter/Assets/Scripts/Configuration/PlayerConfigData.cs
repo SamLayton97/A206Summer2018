@@ -27,6 +27,14 @@ public class PlayerConfigData
     float slowAstern = .2f;
     float fullAstern = .4f;
 
+    // declares boat hull fields and sets them to safe defaults
+    int hullIntegrity = 100;
+    int hullCapacity = 20;
+
+    // declares gas tank fields and sets them to safe defaults
+    float gasTankSize = 50f;
+    float gasConsumptionRate = 1f;
+
     #endregion
 
     #region Properties
@@ -85,6 +93,38 @@ public class PlayerConfigData
     public float FullAstern
     {
         get { return fullAstern; }
+    }
+
+    /// <summary>
+    /// Gets boat's max hull integrity
+    /// </summary>
+    public int HullIntegrity
+    {
+        get { return hullIntegrity; }
+    }
+
+    /// <summary>
+    /// Gets max boat can store in its hull
+    /// </summary>
+    public int HullCapacity
+    {
+        get { return hullCapacity; }
+    }
+
+    /// <summary>
+    /// Gets how much gas boat can store in its tank
+    /// </summary>
+    public float GasTankSize
+    {
+        get { return gasTankSize; }
+    }
+
+    /// <summary>
+    /// Gets rate at which boat's engine consumes gas
+    /// </summary>
+    public float GasConsumptionRate
+    {
+        get { return gasConsumptionRate; }
     }
 
     #endregion
@@ -157,6 +197,14 @@ public class PlayerConfigData
         stop = float.Parse(csvData["stop"]);
         slowAstern = float.Parse(csvData["slowAstern"]);
         fullAstern = float.Parse(csvData["fullAstern"]);
+
+        // sets boat hull fields to appropriate values
+        hullIntegrity = int.Parse(csvData["hullIntegrity"]);
+        hullCapacity = int.Parse(csvData["hullCapacity"]);
+
+        // sets gas tank fields to appropriate values
+        gasTankSize = float.Parse(csvData["gasTankSize"]);
+        gasConsumptionRate = float.Parse(csvData["gasConsumptionRate"]);
     }
 
 }
