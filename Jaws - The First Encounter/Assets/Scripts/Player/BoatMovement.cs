@@ -6,8 +6,10 @@ using UnityEngine.Events;
 
 public class BoatMovement : MonoBehaviour
 {
+    Item item;
+
     // declares momement variables
-    Rigidbody2D rb2d;                           // boat's rigid body 2d component
+    Rigidbody2D rb2d;                           // boat's rigidbody2d component
     Vector2 boatDirection = new Vector2(1, 0);  // initial direction of boat
     float maxBoatForce;                         // max force which boat moves at
     float rotateDegreesPerSecond;               // rate by which ship rotates
@@ -124,6 +126,23 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used for item pickup
+    /// </summary>
+    /// <param name="coll"></param>
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "item")
+        {
+            bool pickedUp = Inventory.instance.Add(item); // if no room, item is not destroyed
+
+            // destroys if picked up
+            if (pickedUp)
+            {
+                Destroy(coll.gameObject);
+            }
+        }
+    }
     #endregion
 
 }
